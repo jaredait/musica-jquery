@@ -64,20 +64,17 @@ function CrearAlbum() {
         ART_ID: $("#ART_ID").val(),
         ALB_FECHA_LANZAMIENTO: $("#ALB_FECHA_LANZAMIENTO").val()
     };
-    console.log(albumNuevo);
-    console.log(JSON.stringify(albumNuevo));
 
     $.ajax(
         {
             type: "POST",
             url: urlAlbum,
-            data: JSON.stringify(albumNuevo),
-            contenType: "application/json;charset=utf-8",
+            data: albumNuevo,
+            contenType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data, status, jqXHR) {
-                alert("insertado");
-                //$("#id-insertado").val(data.ALB_ID);
-                //$("#id-nombre").val(data.ALB_NOMBRE);
+                $("#id-insertado").val(data.ALB_ID);
+                $("#nombre-insertado").val(data.ALB_NOMBRE);
 
             },
             error: function (jqHHR, textStatus, errorThrown) {
@@ -85,4 +82,13 @@ function CrearAlbum() {
             }
         }
     );
+
+    limpiarCampos();
+}
+
+function limpiarCampos() {
+    $("#ALB_ID").val("")
+    $("#ALB_NOMBRE").val("")
+    $("#ART_ID").val("")
+    $("#ALB_FECHA_LANZAMIENTO").val("");
 }
