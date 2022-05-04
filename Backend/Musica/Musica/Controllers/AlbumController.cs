@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Musica.Controllers
 {
@@ -21,7 +22,7 @@ namespace Musica.Controllers
         public HttpResponseMessage Get()
         {
             IEnumerable<ALBUM> listaAlbumes = _albumModelo.getAlbumes();
-            if(listaAlbumes == null)
+            if (listaAlbumes == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No se encontraron albumes");
             }
@@ -32,7 +33,7 @@ namespace Musica.Controllers
         public HttpResponseMessage Get(string id)
         {
             ALBUM albumTemp = _albumModelo.getAlbum(id);
-            if(albumTemp == null)
+            if (albumTemp == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, $"El album con id = {id} no existe");
             }
@@ -40,6 +41,7 @@ namespace Musica.Controllers
         }
 
         // POST: api/Album
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public HttpResponseMessage Post([FromBody] ALBUM nuevoAlbum)
         {
             try
@@ -50,8 +52,8 @@ namespace Musica.Controllers
                 mensaje.Headers.Location = new Uri(Request.RequestUri + nuevoAlbum.ALB_ID.ToString());
 
                 return mensaje;
-            } 
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
@@ -59,7 +61,7 @@ namespace Musica.Controllers
         }
 
         // PUT: api/Album/5
-        public HttpResponseMessage Put(string id, [FromBody]ALBUM albumActualizado)
+        public HttpResponseMessage Put(string id, [FromBody] ALBUM albumActualizado)
         {
             try
             {
@@ -71,7 +73,7 @@ namespace Musica.Controllers
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, albumTemp);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
