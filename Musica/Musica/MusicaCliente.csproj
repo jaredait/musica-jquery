@@ -83,8 +83,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Paginas\AlbumFiltro.html" />
-    <Content Include="Paginas\AlbumPost.html" />
+    <Content Include="Paginas\Album\AlbumFiltro.html" />
+    <Content Include="Paginas\Album\AlbumPost.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -114,12 +114,13 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
-    <Content Include="Paginas\AlbumIndex.html" />
+    <Content Include="Paginas\Album\AlbumIndex.html" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <Content Include="Scripts\MisScripts\AlbumScript.js" />
+    <Content Include="Scripts\MisScripts\jquery-3.6.0.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

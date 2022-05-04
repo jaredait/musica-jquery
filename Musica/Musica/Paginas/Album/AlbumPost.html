@@ -8,15 +8,17 @@
 <body>
     <div class="container">
         <br />
+        <h1>Agregar Álbum</h1>
+        <br />
         <div>
-            Album ID:
+            Álbum ID:
         </div>
         <div>
             <input type="text" id="ALB_ID" class="form-control w-25" />
         </div>
         <br />
         <div>
-            Nombre ID:
+            Nombre:
         </div>
         <div>
             <input type="text" id="ALB_NOMBRE" class="form-control w-25" />
@@ -43,18 +45,27 @@
         <br />
         <div id="lista-albumes"></div>
 
-
-    </div>
-    <div>
+        <br />
         <div>
-            <input type="text" id="id-insertado" class="form-control w-25" />
-        </div>
-        <div>
-            <input type="text" id="nombre-insertado" class="form-control w-25" />
+            <h3>
+                Álbum agregado:
+            </h3>
+            <p>ID:</p>
+            <div>
+                <input type="text" id="id-insertado" class="form-control w-25" disabled />
+            </div>
+            <p>Nombre:</p>
+            <div>
+                <input type="text" id="nombre-insertado" class="form-control w-25" disabled />
+            </div>
         </div>
     </div>
+    <br />
 
-    <script src="../Scripts/jquery-3.6.0.slim.js"></script>
+
+
+
+    <script src="../Scripts/MisScripts/jquery-3.6.0.js"></script>
     <script src="../Scripts/MisScripts/AlbumScript.js"></script>
     <script>
         $("#btnCrearAlbum").click(
