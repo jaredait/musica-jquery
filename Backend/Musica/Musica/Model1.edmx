@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MusicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ALBUM">
+          <Key>
+            <PropertyRef Name="ALB_ID" />
+          </Key>
+          <Property Name="ALB_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ART_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ALB_NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="ALB_FECHA_LANZAMIENTO" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ARTISTA">
+          <Key>
+            <PropertyRef Name="ART_ID" />
+          </Key>
+          <Property Name="ART_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ART_NOMBRE" Type="varchar" MaxLength="100" />
+          <Property Name="ART_EMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="ART_FECHA_CREACION" Type="datetime" />
+          <Property Name="ART_CANT_INTEGRANTES" Type="int" />
+        </EntityType>
+        <EntityType Name="CANCION">
+          <Key>
+            <PropertyRef Name="CAN_ID" />
+          </Key>
+          <Property Name="CAN_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ALB_ID" Type="varchar" MaxLength="10" />
+          <Property Name="GEN_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CAN_NOMBRE" Type="varchar" MaxLength="100" />
+          <Property Name="CAN_DURACION" Type="decimal" Precision="6" Scale="2" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="GEN_ID" />
+          </Key>
+          <Property Name="GEN_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="GEN_NOMBRE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_ALBUM_RELATIONS_ARTISTA">
+          <End Role="ARTISTA" Type="Self.ARTISTA" Multiplicity="1" />
+          <End Role="ALBUM" Type="Self.ALBUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTISTA">
+              <PropertyRef Name="ART_ID" />
+            </Principal>
+            <Dependent Role="ALBUM">
+              <PropertyRef Name="ART_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANCION_RELATIONS_ALBUM">
+          <End Role="ALBUM" Type="Self.ALBUM" Multiplicity="0..1" />
+          <End Role="CANCION" Type="Self.CANCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALBUM">
+              <PropertyRef Name="ALB_ID" />
+            </Principal>
+            <Dependent Role="CANCION">
+              <PropertyRef Name="ALB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANCION_RELATIONS_GENERO">
+          <End Role="GENERO" Type="Self.GENERO" Multiplicity="1" />
+          <End Role="CANCION" Type="Self.CANCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENERO">
+              <PropertyRef Name="GEN_ID" />
+            </Principal>
+            <Dependent Role="CANCION">
+              <PropertyRef Name="GEN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SeleccionarArtistaPorIdSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iartid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SeleccionarArtistasSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="MusicaModelStoreContainer">
+          <EntitySet Name="ALBUM" EntityType="Self.ALBUM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ARTISTA" EntityType="Self.ARTISTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CANCION" EntityType="Self.CANCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENERO" EntityType="Self.GENERO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ALBUM_RELATIONS_ARTISTA" Association="Self.FK_ALBUM_RELATIONS_ARTISTA">
+            <End Role="ARTISTA" EntitySet="ARTISTA" />
+            <End Role="ALBUM" EntitySet="ALBUM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANCION_RELATIONS_ALBUM" Association="Self.FK_CANCION_RELATIONS_ALBUM">
+            <End Role="ALBUM" EntitySet="ALBUM" />
+            <End Role="CANCION" EntitySet="CANCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANCION_RELATIONS_GENERO" Association="Self.FK_CANCION_RELATIONS_GENERO">
+            <End Role="GENERO" EntitySet="GENERO" />
+            <End Role="CANCION" EntitySet="CANCION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ALBUM">
+          <Key>
+            <PropertyRef Name="ALB_ID" />
+          </Key>
+          <Property Name="ALB_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ART_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ALB_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ALB_FECHA_LANZAMIENTO" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ARTISTA" Relationship="Self.FK_ALBUM_RELATIONS_ARTISTA" FromRole="ALBUM" ToRole="ARTISTA" />
+          <NavigationProperty Name="CANCION" Relationship="Self.FK_CANCION_RELATIONS_ALBUM" FromRole="ALBUM" ToRole="CANCION" />
+        </EntityType>
+        <EntityType Name="ARTISTA">
+          <Key>
+            <PropertyRef Name="ART_ID" />
+          </Key>
+          <Property Name="ART_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ART_NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ART_EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ART_FECHA_CREACION" Type="DateTime" Precision="3" />
+          <Property Name="ART_CANT_INTEGRANTES" Type="Int32" />
+          <NavigationProperty Name="ALBUM" Relationship="Self.FK_ALBUM_RELATIONS_ARTISTA" FromRole="ARTISTA" ToRole="ALBUM" />
+        </EntityType>
+        <EntityType Name="CANCION">
+          <Key>
+            <PropertyRef Name="CAN_ID" />
+          </Key>
+          <Property Name="CAN_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ALB_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GEN_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CAN_NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CAN_DURACION" Type="Decimal" Precision="6" Scale="2" />
+          <NavigationProperty Name="ALBUM" Relationship="Self.FK_CANCION_RELATIONS_ALBUM" FromRole="CANCION" ToRole="ALBUM" />
+          <NavigationProperty Name="GENERO" Relationship="Self.FK_CANCION_RELATIONS_GENERO" FromRole="CANCION" ToRole="GENERO" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="GEN_ID" />
+          </Key>
+          <Property Name="GEN_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEN_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CANCION" Relationship="Self.FK_CANCION_RELATIONS_GENERO" FromRole="GENERO" ToRole="CANCION" />
+        </EntityType>
+        <Association Name="FK_ALBUM_RELATIONS_ARTISTA">
+          <End Role="ARTISTA" Type="Self.ARTISTA" Multiplicity="1" />
+          <End Role="ALBUM" Type="Self.ALBUM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTISTA">
+              <PropertyRef Name="ART_ID" />
+            </Principal>
+            <Dependent Role="ALBUM">
+              <PropertyRef Name="ART_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANCION_RELATIONS_ALBUM">
+          <End Role="ALBUM" Type="Self.ALBUM" Multiplicity="0..1" />
+          <End Role="CANCION" Type="Self.CANCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ALBUM">
+              <PropertyRef Name="ALB_ID" />
+            </Principal>
+            <Dependent Role="CANCION">
+              <PropertyRef Name="ALB_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CANCION_RELATIONS_GENERO">
+          <End Role="GENERO" Type="Self.GENERO" Multiplicity="1" />
+          <End Role="CANCION" Type="Self.CANCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENERO">
+              <PropertyRef Name="GEN_ID" />
+            </Principal>
+            <Dependent Role="CANCION">
+              <PropertyRef Name="GEN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ALBUM" EntityType="Self.ALBUM" />
+          <EntitySet Name="ARTISTA" EntityType="Self.ARTISTA" />
+          <EntitySet Name="CANCION" EntityType="Self.CANCION" />
+          <EntitySet Name="GENERO" EntityType="Self.GENERO" />
+          <AssociationSet Name="FK_ALBUM_RELATIONS_ARTISTA" Association="Self.FK_ALBUM_RELATIONS_ARTISTA">
+            <End Role="ARTISTA" EntitySet="ARTISTA" />
+            <End Role="ALBUM" EntitySet="ALBUM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANCION_RELATIONS_ALBUM" Association="Self.FK_CANCION_RELATIONS_ALBUM">
+            <End Role="ALBUM" EntitySet="ALBUM" />
+            <End Role="CANCION" EntitySet="CANCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CANCION_RELATIONS_GENERO" Association="Self.FK_CANCION_RELATIONS_GENERO">
+            <End Role="GENERO" EntitySet="GENERO" />
+            <End Role="CANCION" EntitySet="CANCION" />
+          </AssociationSet>
+          <FunctionImport Name="SeleccionarArtistaPorIdSP" ReturnType="Collection(MusicaModel.SeleccionarArtistaPorIdSP_Result)">
+            <Parameter Name="iartid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SeleccionarArtistasSP" ReturnType="Collection(MusicaModel.SeleccionarArtistasSP_Result)" />
+        </EntityContainer>
+        <ComplexType Name="SeleccionarArtistaPorIdSP_Result">
+          <Property Type="String" Name="ART_ID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ART_NOMBRE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ART_EMAIL" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ART_FECHA_CREACION" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ART_CANT_INTEGRANTES" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SeleccionarArtistasSP_Result">
+          <Property Type="String" Name="ART_ID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ART_NOMBRE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ART_EMAIL" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ART_FECHA_CREACION" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="ART_CANT_INTEGRANTES" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicaModelStoreContainer" CdmEntityContainer="MusicaEntities">
+          <EntitySetMapping Name="ALBUM">
+            <EntityTypeMapping TypeName="MusicaModel.ALBUM">
+              <MappingFragment StoreEntitySet="ALBUM">
+                <ScalarProperty Name="ALB_ID" ColumnName="ALB_ID" />
+                <ScalarProperty Name="ART_ID" ColumnName="ART_ID" />
+                <ScalarProperty Name="ALB_NOMBRE" ColumnName="ALB_NOMBRE" />
+                <ScalarProperty Name="ALB_FECHA_LANZAMIENTO" ColumnName="ALB_FECHA_LANZAMIENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTISTA">
+            <EntityTypeMapping TypeName="MusicaModel.ARTISTA">
+              <MappingFragment StoreEntitySet="ARTISTA">
+                <ScalarProperty Name="ART_ID" ColumnName="ART_ID" />
+                <ScalarProperty Name="ART_NOMBRE" ColumnName="ART_NOMBRE" />
+                <ScalarProperty Name="ART_EMAIL" ColumnName="ART_EMAIL" />
+                <ScalarProperty Name="ART_FECHA_CREACION" ColumnName="ART_FECHA_CREACION" />
+                <ScalarProperty Name="ART_CANT_INTEGRANTES" ColumnName="ART_CANT_INTEGRANTES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CANCION">
+            <EntityTypeMapping TypeName="MusicaModel.CANCION">
+              <MappingFragment StoreEntitySet="CANCION">
+                <ScalarProperty Name="CAN_ID" ColumnName="CAN_ID" />
+                <ScalarProperty Name="ALB_ID" ColumnName="ALB_ID" />
+                <ScalarProperty Name="GEN_ID" ColumnName="GEN_ID" />
+                <ScalarProperty Name="CAN_NOMBRE" ColumnName="CAN_NOMBRE" />
+                <ScalarProperty Name="CAN_DURACION" ColumnName="CAN_DURACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENERO">
+            <EntityTypeMapping TypeName="MusicaModel.GENERO">
+              <MappingFragment StoreEntitySet="GENERO">
+                <ScalarProperty Name="GEN_ID" ColumnName="GEN_ID" />
+                <ScalarProperty Name="GEN_NOMBRE" ColumnName="GEN_NOMBRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SeleccionarArtistaPorIdSP" FunctionName="MusicaModel.Store.SeleccionarArtistaPorIdSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicaModel.SeleccionarArtistaPorIdSP_Result">
+                <ScalarProperty Name="ART_ID" ColumnName="ART_ID" />
+                <ScalarProperty Name="ART_NOMBRE" ColumnName="ART_NOMBRE" />
+                <ScalarProperty Name="ART_EMAIL" ColumnName="ART_EMAIL" />
+                <ScalarProperty Name="ART_FECHA_CREACION" ColumnName="ART_FECHA_CREACION" />
+                <ScalarProperty Name="ART_CANT_INTEGRANTES" ColumnName="ART_CANT_INTEGRANTES" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SeleccionarArtistasSP" FunctionName="MusicaModel.Store.SeleccionarArtistasSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MusicaModel.SeleccionarArtistasSP_Result">
+                <ScalarProperty Name="ART_ID" ColumnName="ART_ID" />
+                <ScalarProperty Name="ART_NOMBRE" ColumnName="ART_NOMBRE" />
+                <ScalarProperty Name="ART_EMAIL" ColumnName="ART_EMAIL" />
+                <ScalarProperty Name="ART_FECHA_CREACION" ColumnName="ART_FECHA_CREACION" />
+                <ScalarProperty Name="ART_CANT_INTEGRANTES" ColumnName="ART_CANT_INTEGRANTES" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

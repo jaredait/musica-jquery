@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <br />
+        <div>
+            Album ID:
+        </div>
+        <div>
+            <input type="text" id="ALB_ID" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Nombre ID:
+        </div>
+        <div>
+            <input type="text" id="ALB_NOMBRE" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Artista ID:
+        </div>
+        <div>
+            <input type="text" id="ART_ID" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Fecha Lanzamiento:
+        </div>
+        <div>
+            <input type="text" id="ALB_FECHA_LANZAMIENTO" class="form-control w-25" />
+        </div>
+
+        <br />
+        <div>
+            <input type="button" id="btnCrearAlbum" value="Guardar" class="btn btn-success" />
+        </div>
+        <br />
+        <div id="lista-albumes"></div>
+
+
+    </div>
+    <div>
+        <div>
+            <input type="text" id="id-insertado" class="form-control w-25" />
+        </div>
+        <div>
+            <input type="text" id="nombre-insertado" class="form-control w-25" />
+        </div>
+    </div>
+
+    <script src="../Scripts/jquery-3.6.0.slim.js"></script>
+    <script src="../Scripts/MisScripts/AlbumScript.js"></script>
+    <script>
+        $("#btnCrearAlbum").click(
+            function () {
+                CrearAlbum();
+            }
+        );
+    </script>
+</body>
+</html>
