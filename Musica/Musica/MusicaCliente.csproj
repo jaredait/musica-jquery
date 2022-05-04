@@ -85,6 +85,23 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Paginas\Album\AlbumFiltro.html" />
     <Content Include="Paginas\Album\AlbumPost.html" />
+    <Content Include="Paginas\Album\AlbumPut.html" />
+    <Content Include="Paginas\Album\AlbumDelete.html" />
+    <Content Include="Paginas\Artista\ArtistaFiltro.html" />
+    <Content Include="Paginas\Artista\ArtistaPost.html" />
+    <Content Include="Paginas\Artista\ArtistaPut.html" />
+    <Content Include="Paginas\Artista\ArtistaDelete.html" />
+    <Content Include="Paginas\Artista\ArtistaIndex.html" />
+    <Content Include="Paginas\Cancion\CancionFiltro.html" />
+    <Content Include="Paginas\Cancion\CancionDelete.html" />
+    <Content Include="Paginas\Cancion\CancionPut.html" />
+    <Content Include="Paginas\Cancion\CancionPost.html" />
+    <Content Include="Paginas\Cancion\CancionIndex.html" />
+    <Content Include="Paginas\Genero\GeneroFiltro.html" />
+    <Content Include="Paginas\Genero\GeneroPost.html" />
+    <Content Include="Paginas\Genero\GeneroDelete.html" />
+    <Content Include="Paginas\Genero\GeneroPut.html" />
+    <Content Include="Paginas\Genero\GeneroIndex.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -120,6 +137,9 @@
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <Content Include="Scripts\MisScripts\AlbumScript.js" />
+    <Content Include="Scripts\MisScripts\CancionScript.js" />
+    <Content Include="Scripts\MisScripts\GeneroScript.js" />
+    <Content Include="Scripts\MisScripts\ArtistaScript.js" />
     <Content Include="Scripts\MisScripts\jquery-3.6.0.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -137,6 +157,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
