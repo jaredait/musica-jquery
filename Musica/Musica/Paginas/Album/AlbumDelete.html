@@ -3,8 +3,49 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="container">
+        <table id="AlbumesTabla" class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>Album ID</th>
+                <th>Artista ID</th>
+                <th>Album nombre</th>
+                <th>Album fecha</th>
+            </tr>
+        </table>
+        <br />
+    </div>
+    <div class="container">
+        <h1>Buscar Álbum</h1>
+        <br />
+        <div>
+            Album ID:
+        </div>
+        <div>
+            <input type="text" id="album-id" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            <input type="button" id="btnEliminar" value="Eliminar" class="btn btn-danger" />
+        </div>
+        <br />
 
+
+    </div>
+    <script src="../../Scripts/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/MisScripts/AlbumScript.js"></script>
+    <script>
+        $("#btnEliminar").click(
+            function () {
+                Eliminar($("#album-id").val());
+            }
+        )
+
+        $(document).ready(function () {
+            ObtenerTodosLosAlbumes();
+        });
+    </script>
 </body>
 </html>

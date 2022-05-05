@@ -43,10 +43,10 @@ function ObtenerAlbumPorId(albumId) {
             url: urlAlbum + albumId,
             dataType: "json",
             success: function (data) {
-                detail = "<div><strong>ALB_ID</strong></div>" + "<div>" + data.ALB_ID + "</div>" +
-                    "<div><strong>ALB_NOMBRE</strong></div>" + "<div>" + data.ALB_NOMBRE + "</div>" +
-                    "<div><strong>ALB_NOMBRE</strong></div>" + "<div>" + data.ART_ID + "</div>" +
-                    "<div><strong>ALB_NOMBRE</strong></div>" + "<div>" + data.ALB_FECHA_LANZAMIENTO + "</div>";
+                detail = "<div><strong>ID:</strong></div>" + "<div>" + data.ALB_ID + "</div>" + "<br />" +
+                    "<div><strong>Nombre:</strong></div>" + "<div>" + data.ALB_NOMBRE + "</div>" + "<br />" +
+                    "<div><strong>Artista:</strong></div>" + "<div>" + data.ART_ID + "</div>" + "<br />" +
+                    "<div><strong>Fecha de lanzamiento:</strong></div>" + "<div>" + data.ALB_FECHA_LANZAMIENTO + "</div>" + "<br />";
                 $("#lista-albumes").html(detail);
             },
             error: function (jqHHR, textStatus, errorThrown) {
@@ -84,6 +84,56 @@ function CrearAlbum() {
     );
 
     limpiarCampos();
+}
+
+function Actualizar() {
+    var albumActualizado =
+    {
+        ALB_ID: $("#ALB_ID").val(),
+        ALB_NOMBRE: $("#ALB_NOMBRE").val(),
+        ART_ID: $("#ART_ID").val(),
+        ALB_FECHA_LANZAMIENTO: $("#ALB_FECHA_LANZAMIENTO").val()
+    };
+    $.ajax(
+        {
+            type: "PUT",
+            url: urlAlbum + albumActualizado.ALB_ID,
+            data: albumActualizado,
+            contenType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status, jqXHR) {
+                $("#id-insertado").val(data.ALB_ID);
+                $("#nombre-insertado").val(data.ALB_NOMBRE);
+
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert($`Status: ${textStatus} (${errorThrown})`);
+            }
+        }
+    );
+    limpiarCampos();
+}
+
+function Eliminar(id) {
+    $.ajax(
+        {
+            type: "DELETE",
+            url: urlAlbum + id,
+            dataType: "json",
+            success: function (data) {
+                if (data === null || data === undefined) {
+
+                }
+                
+                window.location.reload();
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert('Status: ' + textStatus + ' (' +errorThrown +')');
+            }
+        }
+    );
+    $("#album-id").val("");
+    
 }
 
 function limpiarCampos() {

@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
+        <h1>Buscar Álbum</h1>
         <br />
         <div>
             Album ID:
@@ -23,13 +24,12 @@
 
 
     </div>
-    <script src="../Scripts/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="../Scripts/MisScripts/AlbumScript.js"></script>
+    <script src="../../Scripts/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/MisScripts/AlbumScript.js"></script>
     <script>
         $("#btnBuscarAlbum").click(
             function () {
                 ObtenerAlbumPorId($("#album-id").val());
-                //alertar();
             }
         )
     </script>

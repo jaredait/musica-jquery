@@ -3,8 +3,36 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="container">
+        <h1>Buscar Artista</h1>
+        <br />
+        <div>
+            Artista ID:
+        </div>
+        <div>
+            <input type="text" id="txt-id" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            <input type="button" id="btn-buscar" value="Buscar" class="btn btn-success" />
+        </div>
+        <br />
+        <div id="lista-datos"></div>
 
+
+    </div>
+
+    <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="../../Scripts/MisScripts/ArtistaScript.js"></script>
+    <script>
+        $("#btn-buscar").click(
+            function () {
+                ObtenerPorId($("#txt-id").val());
+            }
+        )
+    </script>
 </body>
 </html>

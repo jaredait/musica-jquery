@@ -3,8 +3,81 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="container">
+        <br />
+        <h1>Agregar Artista</h1>
+        <br />
+        <div>
+            ID:
+        </div>
+        <div>
+            <input type="text" id="txt-id" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Nombre:
+        </div>
+        <div>
+            <input type="text" id="txt-nombre" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Email:
+        </div>
+        <div>
+            <input type="text" id="txt-email" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Fecha de creación:
+        </div>
+        <div>
+            <input type="text" id="txt-fecha-creacion" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            No. integrantes:
+        </div>
+        <div>
+            <input type="text" id="txt-cant-integrantes" class="form-control w-25" />
+        </div>
 
+        <br />
+        <div>
+            <input type="button" id="btnCrear" value="Guardar" class="btn btn-success" />
+        </div>
+
+        <br />
+        <div>
+            <h3>
+                Artista agregado:
+            </h3>
+            <p>ID:</p>
+            <div>
+                <input type="text" id="id-insertado" class="form-control w-25" disabled />
+            </div>
+            <p>Nombre:</p>
+            <div>
+                <input type="text" id="nombre-insertado" class="form-control w-25" disabled />
+            </div>
+        </div>
+    </div>
+    <br />
+
+
+
+
+    <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
+    <script src="../../Scripts/MisScripts/ArtistaScript.js"></script>
+    <script>
+        $("#btnCrear").click(
+            function () {
+                Crear();
+            }
+        );
+    </script>
 </body>
 </html>

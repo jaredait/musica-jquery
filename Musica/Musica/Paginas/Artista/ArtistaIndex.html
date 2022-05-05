@@ -1,10 +1,30 @@
 ﻿<!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
     <title></title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="container">
+        <h1>Ver Artistas</h1>
+        <table id="TablaDatos" class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>ART_ID</th>
+                <th>ART_NOMBRE</th>
+                <th>ART_EMAIL</th>
+                <th>ART_FECHA_CREACION</th>
+                <th>ART_CANT_INTEGRANTES</th>
+            </tr>
+        </table>
+        <br />
+    </div>
 
+    <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
+    <script src="../../Scripts/MisScripts/ArtistaScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            ObtenerTodos();
+        });
+    </script>
 </body>
 </html>

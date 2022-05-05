@@ -1,10 +1,30 @@
 ﻿<!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
     <title></title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="container">
+        <h1>Ver Canciones</h1>
+        <table id="TablaDatos" class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>CAN_ID</th>
+                <th>ALBUM_ID</th>
+                <th>GEN_ID</th>
+                <th>CAN_NOMBRE</th>
+                <th>CAN_DURACION</th>
+            </tr>
+        </table>
+        <br />
+    </div>
 
+    <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
+    <script src="../../Scripts/MisScripts/CancionScript.js"></script>
+    <script>
+        $(document).ready(function () {
+            ObtenerTodos();
+        });
+    </script>
 </body>
 </html>

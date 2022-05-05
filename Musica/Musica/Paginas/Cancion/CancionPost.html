@@ -3,8 +3,83 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="container">
+        <br />
+        <h1>Agregar Canción</h1>
+        <br />
+        <div>
+            ID:
+        </div>
+        <div>
+            <input type="text" id="txt-id" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Álbum:
+        </div>
+        <div>
+            <input type="text" id="txt-album" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Género:
+        </div>
+        <div>
+            <input type="text" id="txt-genero" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Nombre:
+        </div>
+        <div>
+            <input type="text" id="txt-nombre" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Duración:
+        </div>
+        <div>
+            <input type="text" id="txt-duracion" class="form-control w-25" />
+        </div>
 
+        <br />
+        <div>
+            <input type="button" id="btnCrear" value="Guardar" class="btn btn-success" />
+        </div>
+        <br />
+        <div id="lista-albumes"></div>
+
+        <br />
+        <div>
+            <h3>
+                Canción agregada:
+            </h3>
+            <p>ID:</p>
+            <div>
+                <input type="text" id="id-insertado" class="form-control w-25" disabled />
+            </div>
+            <p>Nombre:</p>
+            <div>
+                <input type="text" id="nombre-insertado" class="form-control w-25" disabled />
+            </div>
+        </div>
+    </div>
+    <br />
+
+
+
+
+    <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
+    <script src="../../Scripts/MisScripts/CancionScript.js"></script>
+    <script>
+        $("#btnCrear").click(
+            function () {
+                Crear();
+            }
+        );
+    </script>
 </body>
 </html>
