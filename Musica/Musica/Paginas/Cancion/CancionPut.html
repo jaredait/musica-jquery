@@ -3,8 +3,94 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="container">
+        <table id="TablaDatos" class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>CAN_ID</th>
+                <th>ALBUM_ID</th>
+                <th>GEN_ID</th>
+                <th>CAN_NOMBRE</th>
+                <th>CAN_DURACION</th>
+            </tr>
+        </table>
+        <br />
+    </div>
+    <div class="container">
+        <br />
+        <h1>Actualizar Canción</h1>
+        <br />
+        <div>
+            ID:
+        </div>
+        <div>
+            <input type="text" id="txt-id" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Álbum:
+        </div>
+        <div>
+            <input type="text" id="txt-album" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Género:
+        </div>
+        <div>
+            <input type="text" id="txt-genero" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Nombre:
+        </div>
+        <div>
+            <input type="text" id="txt-nombre" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            Duración:
+        </div>
+        <div>
+            <input type="text" id="txt-duracion" class="form-control w-25" />
+        </div>
 
+        <br />
+        <div>
+            <input type="button" id="btnActualizar" value="Actualizar" class="btn btn-success" />
+        </div>
+
+        <br />
+        <div>
+            <h3>
+                Canción Actualizada:
+            </h3>
+            <p>ID:</p>
+            <div>
+                <input type="text" id="id-insertado" class="form-control w-25" disabled />
+            </div>
+            <p>Nombre:</p>
+            <div>
+                <input type="text" id="nombre-insertado" class="form-control w-25" disabled />
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
+    <script src="../../Scripts/MisScripts/CancionScript.js"></script>
+    <script>
+        $("#btnActualizar").click(
+            function () {
+                Actualizar();
+            }
+        );
+
+        $(document).ready(function () {
+            ObtenerTodos();
+        });
+    </script>
 </body>
 </html>

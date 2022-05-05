@@ -119,12 +119,10 @@ function Eliminar(id) {
         {
             type: "DELETE",
             url: urlAlbum + id,
-            dataType: "json",
             success: function (data) {
                 if (data === null || data === undefined) {
 
                 }
-                
                 window.location.reload();
             },
             error: function (jqHHR, textStatus, errorThrown) {

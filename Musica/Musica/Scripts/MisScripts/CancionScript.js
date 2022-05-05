@@ -84,6 +84,55 @@ function Crear() {
     limpiarCampos();
 }
 
+function Actualizar() {
+    var cancionActualizada =
+    {
+        CAN_ID: $("#txt-id").val(),
+        ALB_ID: $("#txt-album").val(),
+        GEN_ID: $("#txt-genero").val(),
+        CAN_NOMBRE: $("#txt-nombre").val(),
+        CAN_DURACION: $("#txt-duracion").val(),
+    };
+
+    $.ajax(
+        {
+            type: "PUT",
+            url: urlCancion + cancionActualizada.CAN_ID,
+            data: cancionActualizada,
+            contenType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status, jqXHR) {
+                $("#id-insertado").val(data.CAN_ID);
+                $("#nombre-insertado").val(data.CAN_NOMBRE);
+
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert('Status: ' + textStatus + ' (' + errorThrown + ') ');
+            }
+        }
+    );
+    limpiarCampos();
+}
+
+function Eliminar(id) {
+    $.ajax(
+        {
+            type: "DELETE",
+            url: urlCancion + id,
+            success: function (data) {
+                if (data === null || data === undefined) {
+
+                }
+                window.location.reload();
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert('Status: ' + textStatus + ' (' + errorThrown + ')');
+            }
+        }
+    );
+    $("#txt-id").val("");
+}
+
 function limpiarCampos() {
     $("#txt-id").val("")
     $("#txt-album").val("")
