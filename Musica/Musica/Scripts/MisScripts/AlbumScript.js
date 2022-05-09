@@ -1,8 +1,10 @@
 ﻿/// <reference path="../jquery-3.6.0.slim.min.js" />
+/// <reference path="artistascript.js" />
 
 //onst { error } = require("jquery");
 
 let urlAlbum = "http://localhost:9070/api/album/";
+let urlArtista = "http://localhost:9070/api/artista/";
 
 
 function alertar() {
@@ -10,50 +12,79 @@ function alertar() {
 }
 
 function ObtenerTodosLosAlbumes() {
-    $.ajax(
-        {
-            type: "GET",
-            url: urlAlbum,
-            dataType: "json",    // para post put o delete usar contentType. dataType especifica el tipo de dato que el servidor devolvera.
-            success: function (data, textStatus, jqXHR) {
-                $.each(data, function (key, value) {
-                    $(
-                        '<tr>' +
-                        '<td>' + value.ALB_ID + '</td>' +
-                        '<td>' + value.ART_ID + '</td>' +
-                        '<td>' + value.ALB_NOMBRE + '</td>' +
-                        '<td>' + value.ALB_FECHA_LANZAMIENTO + '</td>' +
-                        '</tr>'
-                    ).appendTo("#AlbumesTabla");
+    // obtener el objeto con los albumes
+    $.ajax({
+        type: "GET",
+        url: urlAlbum,
+        dataType: "json",
+        success: function (dataAlbum, textStatus, jqXHR) {
+            // si logra obtener los albumes, obtiene los artistas
+            $.ajax({
+                type: "GET",
+                url: urlArtista,
+                dataType: "json",
+                success: function (dataArtista, textStatus, jqXHR) {
+                    // si logra obtener los artistas, itero por el objeto de albumes para imprimirlos en la tabla
+                    $.each(dataAlbum, function (keyAlbum, valueAlbum) {
+                        // busco el nombre del artista comparando la FK de ALBUM y la PK de ARTISTA
+                        let descripcionArtista = dataArtista.find(function (value, index, array) {
+                            if (value.ART_ID == valueAlbum.ART_ID) {
+                                return value.ART_NOMBRE;
+                            }
+                        }).ART_NOMBRE;
+                        $(
+                            '<tr>' +
+                            '<td>' + valueAlbum.ALB_ID + '</td>' +
+                            '<td>' + descripcionArtista + '</td>' +
+                            '<td>' + valueAlbum.ALB_NOMBRE + '</td>' +
+                            '<td>' + valueAlbum.ALB_FECHA_LANZAMIENTO + '</td>' +
+                            '</tr>'
+                        ).appendTo("#TablaDatos");
+                    });
+                },
+                error: function (jqHHR, textStatus, errorThrown) {
+                    alert($`Status: ${textStatus} (${errorThrown})`);
                 }
-
-                );
-            },
-            error: function (jqHHR, textStatus, errorThrown) {
-                alert($`Status: ${textStatus} (${errorThrown})`);
-            }
+            });
+        },
+        error: function (jqHHR, textStatus, errorThrown) {
+            alert($`Status: ${textStatus} (${errorThrown})`);
         }
-    );
+    });
+}
+
+function cargarComboBox(item) {
+
 }
 
 function ObtenerAlbumPorId(albumId) {
-    $.ajax(
-        {
-            type: "GET",
-            url: urlAlbum + albumId,
-            dataType: "json",
-            success: function (data) {
-                detail = "<div><strong>ID:</strong></div>" + "<div>" + data.ALB_ID + "</div>" + "<br />" +
-                    "<div><strong>Nombre:</strong></div>" + "<div>" + data.ALB_NOMBRE + "</div>" + "<br />" +
-                    "<div><strong>Artista:</strong></div>" + "<div>" + data.ART_ID + "</div>" + "<br />" +
-                    "<div><strong>Fecha de lanzamiento:</strong></div>" + "<div>" + data.ALB_FECHA_LANZAMIENTO + "</div>" + "<br />";
-                $("#lista-albumes").html(detail);
-            },
-            error: function (jqHHR, textStatus, errorThrown) {
-                alert($`Status: ${textStatus} (${errorThrown})`);
-            }
+    $.ajax({
+        type: "GET",
+        url: urlAlbum + albumId,
+        dataType: "json",
+        success: function (dataAlbum) {
+            // si logra obtener los albumes, obtiene el artistas con la FK
+            $.ajax({
+                type: "GET",
+                url: urlArtista + dataAlbum.ART_ID,
+                dataType: "json",
+                success: function (dataArtista, textStatus, jqXHR) {
+                    detail =
+                        "<div><strong>ID:</strong></div>" + "<div>" + dataAlbum.ALB_ID + "</div>" + "<br />" +
+                        "<div><strong>Nombre:</strong></div>" + "<div>" + dataAlbum.ALB_NOMBRE + "</div>" + "<br />" +
+                        "<div><strong>Artista:</strong></div>" + "<div>" + dataArtista.ART_NOMBRE + "</div>" + "<br />" +
+                        "<div><strong>Fecha de lanzamiento:</strong></div>" + "<div>" + dataAlbum.ALB_FECHA_LANZAMIENTO + "</div>" + "<br />";
+                    $("#lista-albumes").html(detail);
+                },
+                error: function (jqHHR, textStatus, errorThrown) {
+                    alert($`Status: ${textStatus} (${errorThrown})`);
+                }
+            });
+        },
+        error: function (jqHHR, textStatus, errorThrown) {
+            alert($`Status: ${textStatus} (${errorThrown})`);
         }
-    );
+    });
 }
 
 function CrearAlbum() {
@@ -126,12 +157,12 @@ function Eliminar(id) {
                 window.location.reload();
             },
             error: function (jqHHR, textStatus, errorThrown) {
-                alert('Status: ' + textStatus + ' (' +errorThrown +')');
+                alert('Status: ' + textStatus + ' (' + errorThrown + ')');
             }
         }
     );
     $("#album-id").val("");
-    
+
 }
 
 function limpiarCampos() {

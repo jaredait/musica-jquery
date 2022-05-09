@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Musica.Controllers
 {
@@ -40,6 +41,7 @@ namespace Musica.Controllers
         }
 
         // POST: api/Artista
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public HttpResponseMessage Post([FromBody] ARTISTA nuevoArtista)
         {
             try

@@ -138,6 +138,7 @@
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <Content Include="Scripts\MisScripts\AlbumScript.js" />
     <Content Include="Scripts\MisScripts\CancionScript.js" />
+    <Content Include="Scripts\MisScripts\EstaticosScript.js" />
     <Content Include="Scripts\MisScripts\GeneroScript.js" />
     <Content Include="Scripts\MisScripts\ArtistaScript.js" />
     <Content Include="Scripts\MisScripts\jquery-3.6.0.js" />

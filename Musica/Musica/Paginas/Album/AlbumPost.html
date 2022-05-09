@@ -25,10 +25,11 @@
         </div>
         <br />
         <div>
-            Artista ID:
+            Artista:
         </div>
         <div>
             <input type="text" id="ART_ID" class="form-control w-25" />
+            <input type=""
         </div>
         <br />
         <div>
@@ -68,6 +69,11 @@
     <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
     <script src="../../Scripts/MisScripts/AlbumScript.js"></script>
     <script>
+        $("cb-lista").ready(
+            function () {
+                cargarComboBox();
+            }
+        );
         $("#btnCrearAlbum").click(
             function () {
                 CrearAlbum();
