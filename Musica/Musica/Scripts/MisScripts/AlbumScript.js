@@ -3,8 +3,12 @@
 
 //onst { error } = require("jquery");
 
+<<<<<<< HEAD
 let urlAlbum = "http://localhost:9070/api/album/";
 let urlArtista = "http://localhost:9070/api/artista/";
+=======
+let urlAlbum = "https://localhost:44321/api/album/";
+>>>>>>> aeabb1ca1681283e7d3ea9575a4dc832501938bd
 
 
 function alertar() {

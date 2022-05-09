@@ -1,7 +1,7 @@
 ﻿// <reference path="jquery-3.6.0.js" />
 /// <reference path="../jquery-3.6.0.slim.min.js" />
 
-const urlCancion = "http://localhost:9070/api/cancion/";
+const urlCancion = "https://localhost:44321/api/cancion/";
 
 function ObtenerTodos() {
     $.ajax(
@@ -81,7 +81,59 @@ function Crear() {
         }
     );
 
-    limpiarCampos();
+    //limpiarCampos();
+}
+
+/****************************************/
+function Actualizar() {
+    var cancionActualizado =
+    {
+        CAN_ID: $("#CAN_ID").val(), 
+        ALB_ID: $("#ALB_ID").val(),
+        GEN_ID: $("#GEN_ID").val(),
+        CAN_NOMBRE: $("#CAN_NOMBRE").val(),
+        CAN_DURACION: $("#CAN_DURACION").val(),
+    };
+    $.ajax(
+        {
+            type: "PUT",
+            url: urlArtista + cancionActualizado.CAN_ID,
+            data: cancionActualizado,
+            contenType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status, jqXHR) {
+                $("#id-insertado").val(data.CAN_ID);
+                $("#nombre-insertado").val(data.CAN_NOMBRE);
+
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert($`Status: ${textStatus} (${errorThrown})`);
+            }
+        }
+    );
+    //limpiarCampos();
+}
+
+function Eliminar(id) {
+    $.ajax(
+        {
+            type: "DELETE",
+            url: urlCancion + id,
+            dataType: "json",
+            success: function (data) {
+                if (data === null || data === undefined) {
+
+                }
+
+                window.location.reload();
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert('Status: ' + textStatus + ' (' + errorThrown + ')');
+            }
+        }
+    );
+    $("#artista-id").val("");
+
 }
 
 function Actualizar() {

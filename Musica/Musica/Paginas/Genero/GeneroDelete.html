@@ -5,6 +5,44 @@
     <title></title>
 </head>
 <body>
+    <div class="container">
+        <table id="GeneroTabla" class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>Genero ID</th>
+                <th>Genero nombre</th>
+            </tr>
+        </table>
+        <br />
+    </div>
+    <div class="container">
+        <h1>Eliminar Genero</h1>
+        <br />
+        <div>
+            Genero ID:
+        </div>
+        <div>
+            <input type="text" id="genero-id" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            <input type="button" id="btnEliminar" value="Eliminar" class="btn btn-danger" />
+        </div>
+        <br />
 
+
+    </div>
+    <script src="../../Scripts/jquery-3.6.0.min.js"></script>
+    <script src="../../Scripts/MisScripts/GeneroScript.js"></script>
+    <script>
+        $("#btnEliminar").click(
+            function () {
+                Eliminar($("#album-id").val());
+            }
+        )
+
+        $(document).ready(function () {
+            ObtenerTodos();
+        });
+    </script>
 </body>
 </html>

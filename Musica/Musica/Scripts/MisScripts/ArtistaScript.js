@@ -1,7 +1,23 @@
 ﻿// <reference path="jquery-3.6.0.js" />
 /// <reference path="../jquery-3.6.0.slim.min.js" />
 
-const urlArtista = "http://localhost:9070/api/artista/";
+const urlArtista = "https://localhost:44321/api/artista/";
+
+function ObtenerArtistas() {
+    $.ajax(
+        {
+            type: "GET",
+            url: urlArtista,
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert($`Status: ${textStatus} (${errorThrown})`);
+            }
+        }
+    );
+}
 
 function ObtenerTodos() {
     $.ajax(
@@ -56,11 +72,11 @@ function ObtenerPorId(id) {
 function Crear() {
     var artistaNuevo =
     {
-        CAN_ID: $("#txt-id").val(),
-        ALB_ID: $("#txt-nombre").val(),
-        GEN_ID: $("#txt-email").val(),
-        CAN_NOMBRE: $("#txt-fecha-creacion").val(),
-        CAN_DURACION: $("#txt-cant-integrantes").val(),
+        ART_ID: $("#txt-id").val(),
+        ART_NOMBRE: $("#txt-nombre").val(),
+        ART_EMAIL: $("#txt-email").val(),
+        ART_FECHA_CREACION: $("#txt-fecha-creacion").val(),
+        ART_CANT_INTEGRANTES: $("#txt-cant-integrantes").val(),
     };
     console.log(artistaNuevo);
     $.ajax(
@@ -84,10 +100,62 @@ function Crear() {
     //limpiarCampos();
 }
 
+///////////////////////////////////////////////////////////////////////////
+function Actualizar() {
+    var artistaActualizado =
+    {
+        ART_ID: $("#ART_ID").val(),
+        ART_NOMBRE: $("#ART_NOMBRE").val(),
+        ART_EMAIL: $("#ART_EMAIL").val(),
+        ART_FECHA_CREACION: $("#ART_FECHA_CREACION").val(),
+        ART_CANT_INTEGRANTES: $("#ART_CANT_INTEGRANTES").val(),
+    };
+    $.ajax(
+        {
+            type: "PUT",
+            url: urlArtista + artistaActualizado.ART_ID,
+            data: artistaActualizado,
+            contenType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, status, jqXHR) {
+                $("#id-insertado").val(data.ART_ID);
+                $("#nombre-insertado").val(data.ART_NOMBRE);
+
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert($`Status: ${textStatus} (${errorThrown})`);
+            }
+        }
+    );
+    limpiarCampos();
+}
+
+function Eliminar(id) {
+    $.ajax(
+        {
+            type: "DELETE",
+            url: urlArtista + id,
+            dataType: "json",
+            success: function (data) {
+                if (data === null || data === undefined) {
+
+                }
+
+                window.location.reload();
+            },
+            error: function (jqHHR, textStatus, errorThrown) {
+                alert('Status: ' + textStatus + ' (' + errorThrown + ')');
+            }
+        }
+    );
+    $("#artista-id").val("");
+
+}
+
 function limpiarCampos() {
-    $("#txt-id").val("")
-    $("#txt-nombre").val("")
-    $("#txt-email").val("")
-    $("#txt-fecha-creacion").val("")
-    $("#txt-cant-integrantes").val("")
+    $("#ART_ID").val("")
+    $("#ART_NOMBRE").val("")
+    $("#ART_EMAIL").val("")
+    $("#ART_FECHA_CREACION").val("")
+    $("#ART_CANT_INTEGRANTES").val("")
 }
