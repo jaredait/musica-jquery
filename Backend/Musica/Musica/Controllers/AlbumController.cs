@@ -9,6 +9,7 @@ using System.Web.Http.Cors;
 
 namespace Musica.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AlbumController : ApiController
     {
         IAlbum _albumModelo;

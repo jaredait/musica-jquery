@@ -3,13 +3,8 @@
 
 //onst { error } = require("jquery");
 
-<<<<<<< HEAD
 let urlAlbum = "http://localhost:9070/api/album/";
 let urlArtista = "http://localhost:9070/api/artista/";
-=======
-let urlAlbum = "https://localhost:44321/api/album/";
->>>>>>> aeabb1ca1681283e7d3ea9575a4dc832501938bd
-
 
 function alertar() {
     alert("hola");
@@ -57,9 +52,40 @@ function ObtenerTodosLosAlbumes() {
     });
 }
 
-function cargarComboBox(item) {
+let helpers =
+{
+    buildDropdown: function (result, dropdown, emptyMessage) {
+        // Remove current options
+        dropdown.html('');
 
+        // Add the empty option with the empty message
+        dropdown.append('<option value="">' + emptyMessage + '</option>');
+
+        // Check result isnt empty
+        if (result != '') {
+            // Loop through each of the results and append the option to the dropdown
+            $.each(result, function (k, v) {
+                dropdown.append('<option value="' + v.ART_ID + '">' + v.ART_NOMBRE + '</option>');
+            });
+        }
+    }
 }
+
+function cargarComboBox(item) {
+    $.ajax({
+        type: "GET",
+        url: urlArtista,
+        dataType: "json",
+        success: function (data) {
+            helpers.buildDropdown(data, $('#dropdown'), 'Selecciona un artista');
+        },
+        error: function (jqHHR, textStatus, errorThrown) {
+            alert($`Status: ${textStatus} (${errorThrown})`);
+        }
+    });
+}
+
+
 
 function ObtenerAlbumPorId(albumId) {
     $.ajax({
@@ -96,7 +122,7 @@ function CrearAlbum() {
     {
         ALB_ID: $("#ALB_ID").val(),
         ALB_NOMBRE: $("#ALB_NOMBRE").val(),
-        ART_ID: $("#ART_ID").val(),
+        ART_ID: $("#dropdown").val(),
         ALB_FECHA_LANZAMIENTO: $("#ALB_FECHA_LANZAMIENTO").val()
     };
 
@@ -126,7 +152,7 @@ function Actualizar() {
     {
         ALB_ID: $("#ALB_ID").val(),
         ALB_NOMBRE: $("#ALB_NOMBRE").val(),
-        ART_ID: $("#ART_ID").val(),
+        ART_ID: $("#dropdown").val(),
         ALB_FECHA_LANZAMIENTO: $("#ALB_FECHA_LANZAMIENTO").val()
     };
     $.ajax(

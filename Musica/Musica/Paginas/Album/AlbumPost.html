@@ -28,9 +28,9 @@
             Artista:
         </div>
         <div>
-            <input type="text" id="ART_ID" class="form-control w-25" />
-            <input type=""
+            <select id="dropdown" class="dropdown-header dropdown-item w-25  dropdown-menu"></select>
         </div>
+        <br />
         <br />
         <div>
             Fecha Lanzamiento:
@@ -69,9 +69,9 @@
     <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
     <script src="../../Scripts/MisScripts/AlbumScript.js"></script>
     <script>
-        $("cb-lista").ready(
+        $(document).ready(
             function () {
-                cargarComboBox();
+                cargarComboBox(this);
             }
         );
         $("#btnCrearAlbum").click(
