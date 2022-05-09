@@ -5,6 +5,33 @@
     <title></title>
 </head>
 <body>
+    <div class="container">
+        <h1>Buscar Genero</h1>
+        <br />
+        <div>
+            Genero ID:
+        </div>
+        <div>
+            <input type="text" id="GEN_ID" class="form-control w-25" />
+        </div>
+        <br />
+        <div>
+            <input type="button" id="btn-buscar" value="Buscar" class="btn btn-success" />
+        </div>
+        <br />
+        <div id="lista-datos"></div>
 
+
+    </div>
+
+    <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="../../Scripts/MisScripts/ArtistaScript.js"></script>
+    <script>
+        $("#btn-buscar").click(
+            function () {
+                ObtenerPorId($("#GEN_ID").val());
+            }
+        )
+    </script>
 </body>
 </html>

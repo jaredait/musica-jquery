@@ -5,6 +5,23 @@
     <title></title>
 </head>
 <body>
+    <div class="container">
+        <table id="GeneroTabla" class="table table-striped table-bordered table-hover">
+            <tr>
+                <th>Cancion ID</th>
+                <th>Album nombre</th>
+            </tr>
+        </table>
+        <br />
+    </div>
 
+    <script src="../../Scripts/jquery-3.6.0.min.js"></script>
+    <script src="../../Scripts/MisScripts/GeneroScript.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            ObtenerTodos();
+        });
+    </script>
 </body>
 </html>

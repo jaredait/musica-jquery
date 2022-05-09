@@ -2,7 +2,7 @@
 
 //onst { error } = require("jquery");
 
-let urlAlbum = "http://localhost:9070/api/album/";
+let urlAlbum = "https://localhost:44321/api/album/";
 
 
 function alertar() {
