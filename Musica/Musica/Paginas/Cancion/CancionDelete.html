@@ -6,7 +6,6 @@
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-<<<<<<< HEAD
     <div id="menu"></div>
     <div class="container">
         <table id="TablaDatos" class="table table-striped table-bordered table-hover">
@@ -16,23 +15,11 @@
                 <th>GEN_ID</th>
                 <th>CAN_NOMBRE</th>
                 <th>CAN_DURACION</th>
-=======
-    <div class="container">
-        <table id="AlbumesTabla" class="table table-striped table-bordered table-hover">
-            <tr>
-                <th>Cancion ID</th>
-                <th>Album ID</th>
-                <th>Genero Id</th>
-                <th>Album fecha</th>
-                <th>Cancion Nombre</th>
-                <th>Cancion Duracion</th>
->>>>>>> aeabb1ca1681283e7d3ea9575a4dc832501938bd
             </tr>
         </table>
         <br />
     </div>
     <div class="container">
-<<<<<<< HEAD
         <h1>Eliminar Canción</h1>
         <br />
         <div>
@@ -55,39 +42,11 @@
         $("#btn-eliminar").click(
             function () {
                 Eliminar($("#txt-id").val());
-=======
-        <h1>Eliminar Cancion</h1>
-        <br />
-        <div>
-            Cancion ID:
-        </div>
-        <div>
-            <input type="text" id="cancion-id" class="form-control w-25" />
-        </div>
-        <br />
-        <div>
-            <input type="button" id="btnEliminar" value="Eliminar" class="btn btn-danger" />
-        </div>
-        <br />
-
-
-    </div>
-    <script src="../../Scripts/jquery-3.6.0.min.js"></script>
-    <script src="../../Scripts/MisScripts/CancionScript.js"></script>
-    <script>
-        $("#btnEliminar").click(
-            function () {
-                Eliminar($("#cancion-id").val());
->>>>>>> aeabb1ca1681283e7d3ea9575a4dc832501938bd
             }
-        )
+        );
 
         $(document).ready(function () {
             ObtenerTodos();
-<<<<<<< HEAD
-            agregarMenu();
-=======
->>>>>>> aeabb1ca1681283e7d3ea9575a4dc832501938bd
         });
     </script>
 </body>

@@ -21,15 +21,17 @@
             Álbum:
         </div>
         <div>
-            <input type="text" id="txt-album" class="form-control w-25" />
+            <select id="dropdownAlbum" class="dropdown-header dropdown-item w-25  dropdown-menu"></select>
         </div>
+        <br />
         <br />
         <div>
             Género:
         </div>
         <div>
-            <input type="text" id="txt-genero" class="form-control w-25" />
+            <select id="dropdownGenero" class="dropdown-header dropdown-item w-25  dropdown-menu"></select>
         </div>
+        <br />
         <br />
         <div>
             Nombre:
@@ -75,6 +77,12 @@
     <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
     <script src="../../Scripts/MisScripts/CancionScript.js"></script>
     <script>
+        $(document).ready(
+            function () {
+                cargarComboBoxAlbum();
+                cargarComboBoxGenero();
+            }
+        );
         $("#btnCrear").click(
             function () {
                 Crear();

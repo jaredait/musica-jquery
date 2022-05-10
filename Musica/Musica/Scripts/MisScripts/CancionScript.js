@@ -1,7 +1,9 @@
 ﻿// <reference path="jquery-3.6.0.js" />
 /// <reference path="../jquery-3.6.0.slim.min.js" />
 
-const urlCancion = "https://localhost:44321/api/cancion/";
+const urlCancion = "http://localhost:9072/api/cancion/";
+const urlGenero = "http://localhost:9072/api/genero/";
+const urlAlbum = "http://localhost:9072/api/album/";
 
 function ObtenerTodos() {
     $.ajax(
@@ -53,16 +55,68 @@ function ObtenerPorId(id) {
     );
 }
 
+let helpers =
+{
+    buildDropdown: function (result, dropdown, emptyMessage, tipo) {
+        // Remove current options
+        dropdown.html('');
+
+        // Add the empty option with the empty message
+        dropdown.append('<option value="">' + emptyMessage + '</option>');
+
+        // Check result isnt empty
+        if (result != '' && tipo === 'ALBUM') {
+            // Loop through each of the results and append the option to the dropdown
+            $.each(result, function (k, v) {
+                dropdown.append('<option value="' + v.ALB_ID + '">' + v.ALB_NOMBRE + '</option>');
+            });
+        }
+        if (result != '' && tipo === 'GENERO') {
+            // Loop through each of the results and append the option to the dropdown
+            $.each(result, function (k, v) {
+                dropdown.append('<option value="' + v.GEN_ID + '">' + v.GEN_NOMBRE + '</option>');
+            });
+        }
+    }
+}
+
+function cargarComboBoxAlbum() {
+    $.ajax({
+        type: "GET",
+        url: urlAlbum,
+        dataType: "json",
+        success: function (data) {
+            helpers.buildDropdown(data, $('#dropdownAlbum'), 'Selecciona un álbum', 'ALBUM');
+        },
+        error: function (jqHHR, textStatus, errorThrown) {
+            alert($`Status: ${textStatus} (${errorThrown})`);
+        }
+    });
+}
+
+function cargarComboBoxGenero() {
+    $.ajax({
+        type: "GET",
+        url: urlGenero,
+        dataType: "json",
+        success: function (data) {
+            helpers.buildDropdown(data, $('#dropdownGenero'), 'Selecciona un género', 'GENERO');
+        },
+        error: function (jqHHR, textStatus, errorThrown) {
+            alert($`Status: ${textStatus} (${errorThrown})`);
+        }
+    });
+}
+
 function Crear() {
     var cancionNueva =
     {
         CAN_ID: $("#txt-id").val(),
-        ALB_ID: $("#txt-album").val(),
-        GEN_ID: $("#txt-genero").val(),
+        ALB_ID: $("#dropdownAlbum").val(),
+        GEN_ID: $("#dropdownGenero").val(),
         CAN_NOMBRE: $("#txt-nombre").val(),
-        CAN_DURACION: $("#txt-duracion").val(),
+        CAN_DURACION: $("#txt-duracion").val()
     };
-
     $.ajax(
         {
             type: "POST",
@@ -81,45 +135,15 @@ function Crear() {
         }
     );
 
-    //limpiarCampos();
+    limpiarCampos();
 }
 
-/****************************************/
-function Actualizar() {
-    var cancionActualizado =
-    {
-        CAN_ID: $("#CAN_ID").val(), 
-        ALB_ID: $("#ALB_ID").val(),
-        GEN_ID: $("#GEN_ID").val(),
-        CAN_NOMBRE: $("#CAN_NOMBRE").val(),
-        CAN_DURACION: $("#CAN_DURACION").val(),
-    };
-    $.ajax(
-        {
-            type: "PUT",
-            url: urlArtista + cancionActualizado.CAN_ID,
-            data: cancionActualizado,
-            contenType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data, status, jqXHR) {
-                $("#id-insertado").val(data.CAN_ID);
-                $("#nombre-insertado").val(data.CAN_NOMBRE);
-
-            },
-            error: function (jqHHR, textStatus, errorThrown) {
-                alert($`Status: ${textStatus} (${errorThrown})`);
-            }
-        }
-    );
-    //limpiarCampos();
-}
 
 function Eliminar(id) {
     $.ajax(
         {
             type: "DELETE",
             url: urlCancion + id,
-            dataType: "json",
             success: function (data) {
                 if (data === null || data === undefined) {
 
@@ -132,7 +156,7 @@ function Eliminar(id) {
             }
         }
     );
-    $("#artista-id").val("");
+    $("#txt-id").val("");
 
 }
 
@@ -140,8 +164,8 @@ function Actualizar() {
     var cancionActualizada =
     {
         CAN_ID: $("#txt-id").val(),
-        ALB_ID: $("#txt-album").val(),
-        GEN_ID: $("#txt-genero").val(),
+        ALB_ID: $("#dropdownAlbum").val(),
+        GEN_ID: $("#dropdownGenero").val(),
         CAN_NOMBRE: $("#txt-nombre").val(),
         CAN_DURACION: $("#txt-duracion").val(),
     };
@@ -166,29 +190,8 @@ function Actualizar() {
     limpiarCampos();
 }
 
-function Eliminar(id) {
-    $.ajax(
-        {
-            type: "DELETE",
-            url: urlCancion + id,
-            success: function (data) {
-                if (data === null || data === undefined) {
-
-                }
-                window.location.reload();
-            },
-            error: function (jqHHR, textStatus, errorThrown) {
-                alert('Status: ' + textStatus + ' (' + errorThrown + ')');
-            }
-        }
-    );
-    $("#txt-id").val("");
-}
-
 function limpiarCampos() {
-    $("#txt-id").val("")
-    $("#txt-album").val("")
-    $("#txt-genero").val("")
-    $("#txt-nombre").val("")
-    $("#txt-duracion").val("")
+    $("#txt-id").val("");
+    $("#txt-nombre").val("");
+    $("#txt-duracion").val("");
 }

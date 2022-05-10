@@ -3,8 +3,8 @@
 
 //onst { error } = require("jquery");
 
-let urlAlbum = "http://localhost:9070/api/album/";
-let urlArtista = "http://localhost:9070/api/artista/";
+let urlAlbum = "http://localhost:9072/api/album/";
+let urlArtista = "http://localhost:9072/api/artista/";
 
 function alertar() {
     alert("hola");
@@ -196,8 +196,7 @@ function Eliminar(id) {
 }
 
 function limpiarCampos() {
-    $("#ALB_ID").val("")
-    $("#ALB_NOMBRE").val("")
-    $("#ART_ID").val("")
+    $("#ALB_ID").val("");
+    $("#ALB_NOMBRE").val("");
     $("#ALB_FECHA_LANZAMIENTO").val("");
 }
