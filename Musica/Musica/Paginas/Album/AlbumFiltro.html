@@ -4,8 +4,12 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <div id="aqui-el-menu"></div>
+    <br />
     <div class="container">
         <h1>Buscar Álbum</h1>
         <br />
@@ -31,7 +35,11 @@
             function () {
                 ObtenerAlbumPorId($("#album-id").val());
             }
-        )
+        );
+
+        $(document).ready(function () {
+            $("#aqui-el-menu").load("https://localhost:44390/Paginas/header-musica.html");
+        });
     </script>
 </body>
 </html>

@@ -102,6 +102,7 @@
     <Content Include="Paginas\Genero\GeneroDelete.html" />
     <Content Include="Paginas\Genero\GeneroPut.html" />
     <Content Include="Paginas\Genero\GeneroIndex.html" />
+    <Content Include="Paginas\header-musica.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />

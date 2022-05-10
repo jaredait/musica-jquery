@@ -4,8 +4,12 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <div id="aqui-el-menu"></div>
+    <br />
     <div class="container">
         <br />
         <h1>Agregar Álbum</h1>
@@ -69,13 +73,17 @@
     <script src="../../Scripts/MisScripts/jquery-3.6.0.js"></script>
     <script src="../../Scripts/MisScripts/AlbumScript.js"></script>
     <script>
+
         $(document).ready(
             function () {
+                $("#aqui-el-menu").load("https://localhost:44390/Paginas/header-musica.html");
                 cargarComboBox(this);
             }
         );
+
         $("#btnCrearAlbum").click(
             function () {
+
                 CrearAlbum();
             }
         );
