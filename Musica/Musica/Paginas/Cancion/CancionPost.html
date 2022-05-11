@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+    <div id="aqui-el-menu"></div>
     <div class="container">
+        <br />
         <br />
         <h1>Agregar Canción</h1>
         <br />
@@ -79,6 +83,7 @@
     <script>
         $(document).ready(
             function () {
+                $("#aqui-el-menu").load("https://localhost:44390/Paginas/header-musica.html");
                 cargarComboBoxAlbum();
                 cargarComboBoxGenero();
             }
