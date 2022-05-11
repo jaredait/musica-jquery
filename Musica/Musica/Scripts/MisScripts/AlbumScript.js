@@ -6,10 +6,6 @@
 let urlAlbum = "http://localhost:9072/api/album/";
 let urlArtista = "http://localhost:9072/api/artista/";
 
-function alertar() {
-    alert("hola");
-}
-
 function ObtenerTodosLosAlbumes() {
     // obtener el objeto con los albumes
     $.ajax({

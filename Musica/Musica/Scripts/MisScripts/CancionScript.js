@@ -6,53 +6,119 @@ const urlGenero = "http://localhost:9072/api/genero/";
 const urlAlbum = "http://localhost:9072/api/album/";
 
 function ObtenerTodos() {
-    $.ajax(
-        {
-            type: "GET",
-            url: urlCancion,
-            dataType: "json",
-            success: function (data, textStatus, jqXHR) {
-                $.each(data, function (key, value) {
-                    $(
-                        '<tr>' +
-                        '<td>' + value.CAN_ID + '</td>' +
-                        '<td>' + value.ALB_ID + '</td>' +
-                        '<td>' + value.GEN_ID + '</td>' +
-                        '<td>' + value.CAN_NOMBRE + '</td>' +
-                        '<td>' + value.CAN_DURACION + '</td>' +
-                        '</tr>'
-                    ).appendTo("#TablaDatos");
-                }
+    // obtener el objeto con los albumes
+    $.ajax({
+        type: "GET",
+        url: urlCancion,
+        dataType: "json",
+        success: function (dataCancion, textStatus, jqXHR) {
+            // si es exitoso, busco los albumes
+            $.ajax({
+                type: "GET",
+                url: urlAlbum,
+                dataType: "json",
+                success: function (dataAlbum, textStatus, jqXHR) {
+                    // si es exitoso, busco los generos
+                    $.ajax({
+                        type: "GET",
+                        url: urlGenero,
+                        dataType: "json",
+                        success: function (dataGenero, textStatus, jqXHR) {
+                            console.log(dataCancion);
+                            console.log(dataAlbum);
+                            console.log(dataGenero);
+                            $.each(dataCancion, function (keyCancion, valueCancion) {
 
-                );
-            },
-            error: function (jqHHR, textStatus, errorThrown) {
-                alert($`Status: ${textStatus} (${errorThrown})`);
-            }
+                                let descripcionAlbum = dataAlbum.find(function (value, index, array) {
+                                    if (value.ALB_ID == valueCancion.ALB_ID) {
+                                        return value.ALB_NOMBRE;
+                                    }
+                                }).ALB_NOMBRE;
+
+
+                                let descripcionGenero = dataGenero.find(function (value, index, array) {
+                                    if (value.GEN_ID == valueCancion.GEN_ID) {
+                                        return value.GEN_NOMBRE;
+                                    }
+                                }).GEN_NOMBRE;
+
+                                $(
+                                    '<tr>' +
+                                    '<td>' + valueCancion.CAN_ID + '</td>' +
+                                    '<td>' + descripcionAlbum + '</td>' +
+                                    '<td>' + descripcionGenero + '</td>' +
+                                    '<td>' + valueCancion.CAN_NOMBRE + '</td>' +
+                                    '<td>' + valueCancion.CAN_DURACION + '</td>' +
+                                    '</tr>'
+                                ).appendTo("#TablaDatos");
+                            }
+
+                            );
+                        },
+
+                        error: function (jqHHR, textStatus, errorThrown) {
+                            alert($`Status: ${textStatus} (${errorThrown})`);
+                        }
+                    });
+
+                },
+                error: function (jqHHR, textStatus, errorThrown) {
+                    alert($`Status: ${textStatus} (${errorThrown})`);
+                }
+            });
+
+        },
+        error: function (jqHHR, textStatus, errorThrown) {
+            alert($`Status: ${textStatus} (${errorThrown})`);
         }
-    );
+    });
 }
 
+
 function ObtenerPorId(id) {
-    $.ajax(
-        {
-            type: "GET",
-            url: urlCancion + id,
-            dataType: "json",
-            success: function (data) {
-                detail =
-                    "<div><strong>ID:</strong></div>" + "<div>" + data.CAN_ID + "</div>" + "<br />" +
-                "<div><strong>Álbum:</strong></div>" + "<div>" + data.ALB_ID + "</div>" + "<br />" +
-                "<div><strong>Género:</strong></div>" + "<div>" + data.GEN_ID + "</div>" + "<br />" +
-                "<div><strong>Nombre:</strong></div>" + "<div>" + data.CAN_NOMBRE + "</div>" + "<br />" +
-                    "<div><strong>Duración:</strong></div>" + "<div>" + data.CAN_DURACION + "</div>" + "<br />";
-                $("#lista-datos").html(detail);
-            },
-            error: function (jqHHR, textStatus, errorThrown) {
-                alert($`Status: ${textStatus} (${errorThrown})`);
-            }
+    // obtener el objeto con los albumes
+    $.ajax({
+        type: "GET",
+        url: urlCancion + id,
+        dataType: "json",
+        success: function (dataCancion, textStatus, jqXHR) {
+            // si es exitoso, busco los albumes
+            $.ajax({
+                type: "GET",
+                url: urlAlbum + dataCancion.ALB_ID,
+                dataType: "json",
+                success: function (dataAlbum, textStatus, jqXHR) {
+                    // si es exitoso, busco los generos
+                    $.ajax({
+                        type: "GET",
+                        url: urlGenero + dataCancion.GEN_ID,
+                        dataType: "json",
+                        success: function (dataGenero, textStatus, jqXHR) {
+                            detail =
+                                "<div><strong>ID:</strong></div>" + "<div>" + dataCancion.CAN_ID + "</div>" + "<br />" +
+                                "<div><strong>Álbum:</strong></div>" + "<div>" + dataAlbum.ALB_NOMBRE + "</div>" + "<br />" +
+                                "<div><strong>Género:</strong></div>" + "<div>" + dataGenero.GEN_NOMBRE + "</div>" + "<br />" +
+                                "<div><strong>Nombre:</strong></div>" + "<div>" + dataCancion.CAN_NOMBRE + "</div>" + "<br />" +
+                                "<div><strong>Duración:</strong></div>" + "<div>" + dataCancion.CAN_DURACION + "</div>" + "<br />";
+                            $("#lista-datos").html(detail);
+                        },
+
+                        error: function (jqHHR, textStatus, errorThrown) {
+                            alert("Status: " + textStatus + " (" + errorThrown + ")");
+                        }
+                    });
+
+                },
+                error: function (jqHHR, textStatus, errorThrown) {
+                    alert($`Status: ${textStatus} (${errorThrown})`);
+                }
+            });
+
+        },
+        error: function (jqHHR, textStatus, errorThrown) {
+            alert($`Status: ${textStatus} (${errorThrown})`);
         }
-    );
+    });
 }
 
 let helpers =
