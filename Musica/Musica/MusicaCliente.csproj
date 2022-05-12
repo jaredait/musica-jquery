@@ -83,6 +83,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="CSS\StyleSheet1.css" />
     <Content Include="Paginas\Album\AlbumFiltro.html" />
     <Content Include="Paginas\Album\AlbumPost.html" />
     <Content Include="Paginas\Album\AlbumPut.html" />
@@ -103,6 +104,7 @@
     <Content Include="Paginas\Genero\GeneroPut.html" />
     <Content Include="Paginas\Genero\GeneroIndex.html" />
     <Content Include="Paginas\header-musica.html" />
+    <Content Include="Paginas\Index\HomeMusica.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -159,7 +161,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Paginas\Imagenes\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
