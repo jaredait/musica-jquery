@@ -3,8 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../../Scripts/bootstrap.min.js"></script>
 </head>
 <body>
+    <div id="aqui-el-menu"></div>
     <div class="container">
         <br />
         <h1>Actualizar Artista</h1>
@@ -91,7 +94,8 @@
         );
 
         $(document).ready(function () {
-            O();
+            $("#aqui-el-menu").load("/Paginas/header-musica.html");
+            ObtenerTodos();
         });
     </script>
 </body>
