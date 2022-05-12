@@ -1,7 +1,7 @@
 ﻿// <reference path="jquery-3.6.0.js" />
 /// <reference path="../jquery-3.6.0.slim.min.js" />
 
-const urlArtista = "https://localhost:44321/api/artista/";
+const urlArtista = "http://localhost:9072/api/artista/";
 
 function ObtenerArtistas() {
     $.ajax(

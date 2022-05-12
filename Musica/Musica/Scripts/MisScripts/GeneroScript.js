@@ -2,7 +2,7 @@
 
 //onst { error } = require("jquery");
 
-let urlGenero = "https://localhost:44321/api/genero/";
+let urlGenero = "http://localhost:9072/api/genero/";
 
 
 
@@ -17,7 +17,7 @@ function ObtenerTodos() {
                     $(
                         '<tr>' +
                         '<td>' + value.GEN_ID + '</td>' +
-                        '<td>' + value.ALB_NOMBRE + '</td>' +
+                        '<td>' + value.GEN_NOMBRE + '</td>' +
                         '</tr>'
                     ).appendTo("#GeneroTabla");
                 }
